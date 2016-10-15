@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <left>
+      <Pane prefHeight="600.0" prefWidth="1000.0" BorderPane.alignment="CENTER" style="-fx-background-color: black">
+         <children>
+            <Canvas fx:id="canvas" height="600.0" width="1000.0" />
+            <Button layoutX="920.0" layoutY="20.0" prefHeight="25.0" prefWidth="67.0" onMouseClicked="#onButton" text="ADD"/>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>

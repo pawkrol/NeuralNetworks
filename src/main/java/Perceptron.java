@@ -1,65 +1,57 @@
-
-
 import java.util.Random;
 
 /**
- * Created by Pawel on 2016-10-09.
+ * Created by Pawel on 2016-10-13.
  */
 public class Perceptron {
 
     private double[] weights;
-    private double treshhold;
 
-    public Perceptron(double treshhold){
-        this.treshhold = treshhold;
-    }
-
-    public void learn(double[][] inputs, int[] outputs, double learnFactor, int iterations){
-        initWeights(inputs[0].length);
-
-        for (;;) {
-            boolean wasMistake = false;
-
-            for (int i = 0; i < outputs.length; i++) {
-                int output = output(inputs[i]);
-                int mistake = outputs[i] - output;
-
-                if (mistake != 0) {
-                    for (int j = 0; j < weights.length - 1; j++) {
-                        weights[j] += learnFactor * mistake * inputs[i][j];
-                    }
-                    weights[weights.length - 1] += learnFactor * mistake;
-
-                    wasMistake = true;
-                }
-
-            }
-
-            if (!wasMistake) break;
-        }
-    }
-
-    public int output(double[] input){
-        double sum = 0.0;
-        for (int i = 0; i < input.length; i++){
-            sum += weights[i] * input[i];
+    public int output(float[] inputs){
+        float sum = 0;
+        for (int i = 0; i < inputs.length; i++){
+            sum += inputs[i] * weights[i];
         }
 
         sum += weights[weights.length - 1];
 
-        if ( sum <= treshhold){ //funkcja progowa unipolarna
-            return 0;
-        } else {
+        if (sum >= 0)
             return 1;
+        else
+            return -1;
+    }
+
+    public void learn(float inputs[][], float[] outputs, float lFactor, int maxIterations){
+        initWeights(inputs[0].length);
+
+        for (int i = 0; i < maxIterations; i++){
+            int globalError = 0;
+
+            for (int p = 0; p < outputs.length; p++){
+                int output = output(inputs[p]);
+                float localError = outputs[p] - output;
+
+                for (int j = 0; j < weights.length - 1; j++){
+                    weights[j] += lFactor * localError * inputs[p][j];
+                }
+                weights[weights.length - 1] += lFactor * localError;
+
+                globalError += (localError * localError);
+            }
+
+            if (globalError == 0) break;
         }
     }
 
-    private void initWeights(int length){
-        Random random = new Random();
-        length++;
-        weights = new double[length];
-        for (int i = 0; i < weights.length; i++){
-            weights[i] = random.nextDouble();
+    private void initWeights(int size){
+        Random rand = new Random();
+
+        size++; //to fit bias
+
+        weights = new double[size];
+        for (int i = 0; i < size; i++){
+            weights[i] = rand.nextFloat();
         }
     }
+
 }
