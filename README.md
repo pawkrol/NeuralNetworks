@@ -10,6 +10,6 @@ Zrzuty również znajdują się w katalogach o nazwach odpowiadających numerom 
 <br>
 [ENG] <br>
 This is an academic project for AGH University in Cracow. Some of the content in this repository may be in polish language.<br>
-In catalogue `Wykresy` one can find a screenshots from the working applications.<br>
+In catalogue `Wykresy` one can find a screenshots of the working applications.<br>
 
 
