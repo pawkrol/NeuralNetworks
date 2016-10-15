@@ -1,3 +1,5 @@
+package org.pawkrol.academic.nn.zaj1;
+
 import java.util.Random;
 
 /**

@@ -1,3 +1,5 @@
+package org.pawkrol.academic.nn.zaj1;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +17,7 @@ public class NeuralNetwork extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("zaj1.fxml"));
         primaryStage.setTitle("Neural Network - Paweł Król");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

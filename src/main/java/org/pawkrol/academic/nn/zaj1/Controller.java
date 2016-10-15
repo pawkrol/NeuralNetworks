@@ -1,3 +1,5 @@
+package org.pawkrol.academic.nn.zaj1;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -89,7 +91,7 @@ public class Controller implements Initializable{
 
 //    private void createContent(){
 //
-//        Perceptron perceptron = new Perceptron();
+//        org.pawkrol.academic.nn.zaj1.Perceptron perceptron = new org.pawkrol.academic.nn.zaj1.Perceptron();
 //
 //        float[][] inputs = {
 //                {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
