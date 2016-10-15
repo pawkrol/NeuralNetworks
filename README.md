@@ -17,6 +17,6 @@ Losowanych jest 1000 punktów oraz dokonywany jest ich podział ze w zależnośc
     Po kliknięciu przycisku *Add* dodany zostaje losowy punkt i przyznany zostaje mu kolor (żółty - pod wykresem, zielony - nad wykresem) przez nauczony perceptron.<br><br>
     Katalog `wykresy\zaj1` zawiera dwa zrzuty ekranu: <br>
      1. *przed_dodaniem_punktow.png* pokazuje aplikację po nauczeniu perceptronu i prezentuje listę 1000 punktów (na których przebiegało uczenie) <br>
-     2. *po_dodaniu_punktow.png* pokazuje aplikację po nauczeniu perceptronu i po dodaniu 100 losowych punktów i przedstawia nauczony percpetron <br>
+     2. *po_dodaniu_punktow.png* pokazuje aplikację po nauczeniu perceptronu oraz po dodaniu 100 losowych punktów. Przedstawia nauczony percpetron <br>
 
 
