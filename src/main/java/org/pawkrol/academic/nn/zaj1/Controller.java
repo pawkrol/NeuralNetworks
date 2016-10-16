@@ -62,7 +62,7 @@ public class Controller implements Initializable{
             }
         }
 
-        perceptron.learn(inputs, outputs, .1f, 400);
+        perceptron.learn(inputs, outputs, .6f, 400);
 
         for (int i = 0; i < 1000; i++) {
             paintPoint(inputs[i][0], inputs[i][1], outputs[i], true);
@@ -91,7 +91,7 @@ public class Controller implements Initializable{
 
 //    private void createContent(){
 //
-//        org.pawkrol.academic.nn.zaj1.Perceptron perceptron = new org.pawkrol.academic.nn.zaj1.Perceptron();
+//        Perceptron perceptron = new Perceptron();
 //
 //        float[][] inputs = {
 //                {-1, -1}, {-1, 1}, {1, -1}, {1, 1}

@@ -9,7 +9,7 @@ public class Perceptron {
 
     private double[] weights;
 
-    public int output(float[] inputs){
+    public float output(float[] inputs){
         float sum = 0;
         for (int i = 0; i < inputs.length; i++){
             sum += inputs[i] * weights[i];
@@ -17,10 +17,11 @@ public class Perceptron {
 
         sum += weights[weights.length - 1];
 
-        if (sum >= 0)
-            return 1;
-        else
-            return -1;
+//        if (sum >= 0)
+//            return 1;
+//        else
+//            return -1;
+        return (float)(1 / (1 + Math.exp(-sum)));
     }
 
     public void learn(float inputs[][], float[] outputs, float lFactor, int maxIterations){
@@ -30,7 +31,7 @@ public class Perceptron {
             int globalError = 0;
 
             for (int p = 0; p < outputs.length; p++){
-                int output = output(inputs[p]);
+                float output = output(inputs[p]);
                 float localError = outputs[p] - output;
 
                 for (int j = 0; j < weights.length - 1; j++){
@@ -55,5 +56,6 @@ public class Perceptron {
             weights[i] = rand.nextFloat();
         }
     }
+
 
 }
