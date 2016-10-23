@@ -1,5 +1,6 @@
 package org.pawkrol.academic.nn.zaj1;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -14,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
+    private final int POINTS_AT_CLICK = 1000;
+
     @FXML
     private Canvas canvas;
 
@@ -23,6 +26,7 @@ public class Controller implements Initializable{
 
     private Random random;
     private Perceptron perceptron;
+    private SinglePerceptronLearner learner;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,23 +34,28 @@ public class Controller implements Initializable{
         this.height = canvas.getHeight();
 
         random = new Random();
-        perceptron = new Perceptron(new BipolarFunction());
+        perceptron = new Perceptron(2, new BipolarFunction());
+        learner = new SinglePerceptronLearner();
 
         gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.RED);
         gc.setFill(Color.RED);
 
-        gc.strokeLine(0, 0, width, f((float)width));
+        gc.strokeLine(0, 0, width, height);
 
-        learn();
+        Platform.runLater(this::learn);
     }
 
     public void onButton(){
-        float x = random.nextFloat() * 1000;
-        float y = random.nextFloat() * 1000;
-        float o = perceptron.output(new float[]{x, y});
+        Platform.runLater(() -> {
+            for (int i = 0; i < POINTS_AT_CLICK; i++) {
+                float x = random.nextFloat() * 1000;
+                float y = random.nextFloat() * 1000;
+                float o = perceptron.calculateOutput(new float[]{x, y}).getOutput();
 
-        paintPoint(x, y, o, false);
+                paintPoint(x, y, o, false);
+            }
+        });
     }
 
     private void learn(){
@@ -64,7 +73,7 @@ public class Controller implements Initializable{
             }
         }
 
-        perceptron.learn(inputs, outputs, .6f, 400);
+        learner.learn(perceptron, inputs, outputs, .6f, 0.00001, 1000);
 
         for (int i = 0; i < 1000; i++) {
             paintPoint(inputs[i][0], inputs[i][1], outputs[i], true);
@@ -90,24 +99,5 @@ public class Controller implements Initializable{
     private float f(float x){
         return (float)(height / width) * x;
     }
-
-//    private void createContent(){
-//
-//        Perceptron perceptron = new Perceptron();
-//
-//        float[][] inputs = {
-//                {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
-//        };
-////        float[] outputs = {-1, -1, -1, 1};
-//        float[] outputs = {1, 1, 1, -1};
-//
-//        perceptron.learn(inputs, outputs, .1f, 100);
-//
-//        System.out.println(perceptron.output(new float[]{-1, -1}));
-//        System.out.println(perceptron.output(new float[]{-1, 1}));
-//        System.out.println(perceptron.output(new float[]{1, -1}));
-//        System.out.println(perceptron.output(new float[]{1, 1}));
-//    }
-
 
 }

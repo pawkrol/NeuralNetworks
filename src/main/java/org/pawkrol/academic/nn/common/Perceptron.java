@@ -4,93 +4,67 @@ import org.pawkrol.academic.nn.common.functions.ActivationFunction;
 
 import java.util.Random;
 
-/**
- * Created by Pawel on 2016-10-13.
- */
 public class Perceptron {
 
-    private ActivationFunction activationFunction;
-    private double[] weights;
-    private float delta;
+    private int numberOfInputs;
 
-    public Perceptron(ActivationFunction activationFunction){
-        this.activationFunction = activationFunction;
+    private ActivationFunction function;
+
+    private float[] weights;
+    private float bias;
+    private float output;
+
+    public Perceptron(int numberOfInputs, ActivationFunction function){
+        this.numberOfInputs = numberOfInputs;
+        this.function = function;
+
+        Random random = new Random();
+        initWeights(random);
+        initBias(random);
     }
 
-    public Perceptron(int inputs, ActivationFunction activationFunction){
-        initWeights(inputs);
-        this.activationFunction = activationFunction;
-    }
-
-    public float output(float[] inputs){
+    public Perceptron calculateOutput(float[] inputs){
         float sum = 0;
-        for (int i = 0; i < inputs.length; i++){
+
+        for (int i = 0; i < numberOfInputs; i++){
             sum += inputs[i] * weights[i];
         }
+        sum += bias;
 
-        sum += weights[weights.length - 1];
+        output = function.f(sum);
 
-        return activationFunction.f(sum);
+        return this;
     }
 
-    public float doutput(float[] inputs){
-        float sum = 0;
-        for (int i = 0; i < inputs.length; i++){
-            sum += inputs[i] * weights[i];
-        }
-
-        sum += weights[weights.length - 1];
-
-        return activationFunction.df(sum);
+    public float getOutput() {
+        return output;
     }
 
-    public void learn(float inputs[][], float[] outputs, float lFactor, int maxIterations){
-        initWeights(inputs[0].length);
-
-        for (int i = 0; i < maxIterations; i++){
-            int globalError = 0;
-
-            for (int p = 0; p < outputs.length; p++){
-                float output = output(inputs[p]);
-                float localError = outputs[p] - output;
-
-                for (int j = 0; j < weights.length - 1; j++){
-                    weights[j] += lFactor * localError * inputs[p][j];
-                }
-                weights[weights.length - 1] += lFactor * localError;
-
-                globalError += (localError * localError);
-            }
-
-            if (globalError == 0) break;
-        }
-    }
-
-    public double[] getWeights() {
+    public float[] getWeights() {
         return weights;
     }
 
-    public void setWeights(double[] weights) {
+    public void setWeights(float[] weights) {
         this.weights = weights;
     }
 
-    public float getDelta() {
-        return delta;
+    public float getBias() {
+        return bias;
     }
 
-    public void setDelta(float delta) {
-        this.delta = delta;
+    public void setBias(float bias) {
+        this.bias = bias;
     }
 
-    private void initWeights(int size){
-        Random rand = new Random();
+    private void initWeights(Random random){
+        weights = new float[numberOfInputs];
 
-        size++; //to fit bias
-
-        weights = new double[size];
-        for (int i = 0; i < size; i++){
-            weights[i] = rand.nextFloat();
+        for (int i = 0; i < weights.length; i++){
+            weights[i] = 0.4f; //random.nextFloat() * 0.9f;
         }
     }
 
+    private void initBias(Random random){
+        bias = 0.9f;//random.nextFloat() * 0.9f;
+    }
 }
