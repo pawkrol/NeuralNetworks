@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.pawkrol.academic.nn.common.Perceptron;
+import org.pawkrol.academic.nn.common.functions.BipolarFunction;
 
 import java.net.URL;
 import java.util.Random;
@@ -28,7 +30,7 @@ public class Controller implements Initializable{
         this.height = canvas.getHeight();
 
         random = new Random();
-        perceptron = new Perceptron();
+        perceptron = new Perceptron(new BipolarFunction());
 
         gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.RED);

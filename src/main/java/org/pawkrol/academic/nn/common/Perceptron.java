@@ -1,4 +1,6 @@
-package org.pawkrol.academic.nn.zaj1;
+package org.pawkrol.academic.nn.common;
+
+import org.pawkrol.academic.nn.common.functions.ActivationFunction;
 
 import java.util.Random;
 
@@ -7,7 +9,18 @@ import java.util.Random;
  */
 public class Perceptron {
 
+    private ActivationFunction activationFunction;
     private double[] weights;
+    private float delta;
+
+    public Perceptron(ActivationFunction activationFunction){
+        this.activationFunction = activationFunction;
+    }
+
+    public Perceptron(int inputs, ActivationFunction activationFunction){
+        initWeights(inputs);
+        this.activationFunction = activationFunction;
+    }
 
     public float output(float[] inputs){
         float sum = 0;
@@ -17,11 +30,18 @@ public class Perceptron {
 
         sum += weights[weights.length - 1];
 
-//        if (sum >= 0)
-//            return 1;
-//        else
-//            return -1;
-        return (float)(1 / (1 + Math.exp(-sum)));
+        return activationFunction.f(sum);
+    }
+
+    public float doutput(float[] inputs){
+        float sum = 0;
+        for (int i = 0; i < inputs.length; i++){
+            sum += inputs[i] * weights[i];
+        }
+
+        sum += weights[weights.length - 1];
+
+        return activationFunction.df(sum);
     }
 
     public void learn(float inputs[][], float[] outputs, float lFactor, int maxIterations){
@@ -46,6 +66,22 @@ public class Perceptron {
         }
     }
 
+    public double[] getWeights() {
+        return weights;
+    }
+
+    public void setWeights(double[] weights) {
+        this.weights = weights;
+    }
+
+    public float getDelta() {
+        return delta;
+    }
+
+    public void setDelta(float delta) {
+        this.delta = delta;
+    }
+
     private void initWeights(int size){
         Random rand = new Random();
 
@@ -56,6 +92,5 @@ public class Perceptron {
             weights[i] = rand.nextFloat();
         }
     }
-
 
 }

@@ -1,5 +1,8 @@
 package org.pawkrol.academic.nn.zaj2;
 
+import org.pawkrol.academic.nn.common.Layer;
+import org.pawkrol.academic.nn.common.functions.SigmoidFunction;
+
 /**
  * Created by pawkrol on 10/15/16.
  */
@@ -131,7 +134,7 @@ public class OneLayerNetwork {
                 }
         };
 
-        Layer layer = new Layer(2);
+        Layer layer = new Layer(2, new SigmoidFunction());
         layer.learn(input, output, .6f, 700);
 
         float[] out;
