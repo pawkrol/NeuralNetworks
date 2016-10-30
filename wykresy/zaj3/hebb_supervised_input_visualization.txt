@@ -1,0 +1,31 @@
+Dane uczące:
+
+#...#
+.#.#.
+..#..	=	wzór nauczyciela: 1
+.#.#.
+#...#
+
+.###.
+#...#
+#...#	= 	wzór nauczyciela: -1
+#...#
+.###.
+
+Dane testowe:
+
+Dane z dodanym szumem.
+
+#...#
+.#.##
+..#..
+.###.
+#..##
+
+.###.
+#...#
+#.#..
+#...#
+##.#.
+
+W programie wprowadzono odzwierciedlenie: '# = 1' oraz '. = -1'
