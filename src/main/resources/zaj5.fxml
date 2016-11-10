@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Button?>
+<BorderPane prefHeight="240.0" prefWidth="160" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pawkrol.academic.nn.zaj5.Controller">
+   <left>
+      <Pane prefHeight="210.0" prefWidth="160.0" BorderPane.alignment="CENTER" style="-fx-background-color: black">
+         <children>
+            <Canvas fx:id="canvas" height="210.0" width="160.0" onMouseClicked="#onCanvasClicked"/>
+            <Button fx:id="asyncButton" layoutX="35.0" layoutY="170.0" prefHeight="25.0" prefWidth="100.0" onMouseClicked="#onAsyncButton" text="Async 10"/>
+            <Button layoutX="35.0" layoutY="205.0" prefHeight="25.0" prefWidth="100.0" onMouseClicked="#onSyncButton" text="Sync"/>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
